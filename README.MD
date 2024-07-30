@@ -87,3 +87,79 @@ CapsuleGeometry(radius : Float, length : Float, capSegments : Integer, radialSeg
 * length (Comprimento da seção do meio): Define o comprimento da seção cilíndrica no meio da cápsula. Opcional, o padrão é 1.
 * capSegments (Segmentos das tampas): Define o número de segmentos curvos usados para construir as extremidades arredondadas da cápsula. Opcional, o padrão é 4.
 * radialSegments (Segmentos radiais): Define o número de faces segmentadas ao redor da circunferência da cápsula. Opcional, o padrão é 8.
+
+## Cone Geometry
+
+ConeGeometry é uma classe em Three.js usada para criar geometrias de cone, úteis para representar objetos que têm a forma de um cone, como chapéus de festa ou pilhas.
+
+* Construtor
+
+
+
+```Dart
+import 'package:slex/slex.dart';
+
+void main() {
+  var src = '# comment\nx := 3 * (4+5);\n';
+  parse(src);
+}
+
+void parse(String src) {
+  var lexer = Lexer();
+  lexer.configureSingleLineComments('#');
+  lexer.setTerminals([':=']);
+  lexer.pushSource('mySource', src);
+  parseProgram(lexer);
+}
+
+void parseProgram(Lexer lexer) {
+  while (lexer.isNotEnd()) {
+    parseAssignment(lexer);
+  }
+}
+
+void parseAssignment(Lexer lexer) {
+  var id = lexer.identifier();
+  print(id);
+  lexer.terminal(':=');
+  parseAdd(lexer);
+  lexer.terminal(';');
+  print('assign');
+}
+
+void parseAdd(Lexer lexer) {
+  parseMul(lexer);
+  while (lexer.isTerminal('+')) {
+    lexer.next();
+    parseMul(lexer);
+    print('add');
+  }
+}
+
+void parseMul(Lexer lexer) {
+  parseUnary(lexer);
+  while (lexer.isTerminal('*')) {
+    lexer.next();
+    parseUnary(lexer);
+    print('mul');
+  }
+}
+
+void parseUnary(Lexer lexer) {
+  if (lexer.isIdentifier()) {
+    var id = lexer.identifier();
+    print(id);
+  } else if (lexer.isInteger()) {
+    var value = lexer.integer();
+    print(value);
+  } else if (lexer.isTerminal('(')) {
+    lexer.next();
+    parseAdd(lexer);
+    lexer.terminal(')');
+  } else {
+    lexer.error('expected ID or INT');
+  }
+}
+
+
+```
