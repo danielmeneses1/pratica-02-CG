@@ -92,74 +92,18 @@ CapsuleGeometry(radius : Float, length : Float, capSegments : Integer, radialSeg
 
 ConeGeometry é uma classe em Three.js usada para criar geometrias de cone, úteis para representar objetos que têm a forma de um cone, como chapéus de festa ou pilhas.
 
-* Construtor
+* Construtor: 
+O construtor da classe ConeGeometry é definido assim:
 
-
-
-```Dart
-import 'package:slex/slex.dart';
-
-void main() {
-  var src = '# comment\nx := 3 * (4+5);\n';
-  parse(src);
-}
-
-void parse(String src) {
-  var lexer = Lexer();
-  lexer.configureSingleLineComments('#');
-  lexer.setTerminals([':=']);
-  lexer.pushSource('mySource', src);
-  parseProgram(lexer);
-}
-
-void parseProgram(Lexer lexer) {
-  while (lexer.isNotEnd()) {
-    parseAssignment(lexer);
-  }
-}
-
-void parseAssignment(Lexer lexer) {
-  var id = lexer.identifier();
-  print(id);
-  lexer.terminal(':=');
-  parseAdd(lexer);
-  lexer.terminal(';');
-  print('assign');
-}
-
-void parseAdd(Lexer lexer) {
-  parseMul(lexer);
-  while (lexer.isTerminal('+')) {
-    lexer.next();
-    parseMul(lexer);
-    print('add');
-  }
-}
-
-void parseMul(Lexer lexer) {
-  parseUnary(lexer);
-  while (lexer.isTerminal('*')) {
-    lexer.next();
-    parseUnary(lexer);
-    print('mul');
-  }
-}
-
-void parseUnary(Lexer lexer) {
-  if (lexer.isIdentifier()) {
-    var id = lexer.identifier();
-    print(id);
-  } else if (lexer.isInteger()) {
-    var value = lexer.integer();
-    print(value);
-  } else if (lexer.isTerminal('(')) {
-    lexer.next();
-    parseAdd(lexer);
-    lexer.terminal(')');
-  } else {
-    lexer.error('expected ID or INT');
-  }
-}
-
-
+```javascript
+ConeGeometry(radius : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
 ```
+
+* radius (Raio da base do cone): Define o raio da base do cone. O padrão é 1.
+* height (Altura do cone): Define a altura do cone. O padrão é 1.
+* radialSegments (Segmentos radiais): Define o número de faces segmentadas ao redor da circunferência do cone. O padrão é 32.
+* heightSegments (Segmentos de altura): Define o número de linhas de faces ao longo da altura do cone. O padrão é 1.
+* openEnded (Aberto embaixo): Um booleano que indica se a base do cone é aberta ou fechada. O padrão é false, o que significa que a base é fechada.
+* thetaStart (Ângulo inicial): Define o ângulo de início para o primeiro segmento. O padrão é 0 (posição das três horas).
+* thetaLength (Comprimento do ângulo theta): Define o ângulo central, frequentemente chamado de theta, do setor circular. O padrão é 2*Pi, que faz um cone completo.
+

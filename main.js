@@ -22,6 +22,11 @@ const material = new THREE.MeshStandardMaterial({ map: texture });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
+const ConeGeometry = new THREE.ConeGeometry(1, 1, 8);
+const cone = new THREE.Mesh(ConeGeometry, material);
+cone.position.x = 2;
+scene.add(cone);
+
 // const geometry2 = new THREE.BoxGeometry(1, 1, 1);
 //const textureLoader2 = new THREE.TextureLoader();
 //const texture2 = textureLoader2.load('https://threejs.org/examples/textures/uv_grid_opengl.jpg');
